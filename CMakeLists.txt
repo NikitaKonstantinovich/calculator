@@ -1,43 +1,33 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.21)
+project(calculator LANGUAGES CXX)
 
-project(calculator VERSION 0.1 LANGUAGES CXX)
-
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-find_package(Qt6 REQUIRED COMPONENTS Quick)
-
+find_package(Qt6 6.8 REQUIRED COMPONENTS Quick Qml)
 qt_standard_project_setup(REQUIRES 6.8)
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Исполняемое приложение
 qt_add_executable(appcalculator
     main.cpp
 )
 
+set_source_files_properties(Theme.qml PROPERTIES
+    QT_QML_SINGLETON_TYPE TRUE
+)
+
+# QML прямо в таргете приложения (импорт: import App 1.0)
 qt_add_qml_module(appcalculator
-    URI calculator
+    URI App
     VERSION 1.0
+    RESOURCE_PREFIX /qt/qml
     QML_FILES
         Main.qml
-        QML_FILES qml/Theme.qml
+        Theme.qml
+        components/CalcButton.qml
+        QML_FILES components/StatusBar.qml
 )
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
-set_target_properties(appcalculator PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appcalculator
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
+# Линковка
+target_link_libraries(appcalculator PRIVATE Qt6::Quick Qt6::Qml)
 
-target_link_libraries(appcalculator
-    PRIVATE Qt6::Quick
-)
-
-include(GNUInstallDirs)
-install(TARGETS appcalculator
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)

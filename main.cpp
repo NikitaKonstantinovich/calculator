@@ -1,18 +1,12 @@
+//main.cpp
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
-
     QQmlApplicationEngine engine;
-    QObject::connect(
-        &engine,
-        &QQmlApplicationEngine::objectCreationFailed,
-        &app,
-        []() { QCoreApplication::exit(-1); },
-        Qt::QueuedConnection);
-    engine.loadFromModule("calculator", "Main");
-
+    engine.addImportPath(QStringLiteral("qrc:/qt/qml"));
+    engine.loadFromModule("App", "Main");
+    if (engine.rootObjects().isEmpty()) return -1;
     return app.exec();
 }
