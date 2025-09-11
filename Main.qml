@@ -11,6 +11,10 @@ ApplicationWindow {
     // не 'undefined'
     Component.onCompleted: console.log("Theme check:", Theme.theme_1_3)
 
+    StatusBar {
+
+    }
+
     CalcButton {
         z: 1
         text: "1"
