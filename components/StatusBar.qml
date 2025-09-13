@@ -26,6 +26,8 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         spacing: 8
 
+        // Wifi
+        WifiIcon {}
 
         // Сотовая связь — треугольник из 4 секций
         Item {
@@ -93,45 +95,8 @@ Item {
             }
         }
 
+        BatteryIcon {}
 
-        Item {
-            id: battery
-            width: 16; height: 16
-
-            // корпус
-            Rectangle {
-                id: body
-                width: 9; height: 13
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                radius: 2
-                color: "transparent"
-                border.color: root.fg
-                border.width: 1
-                antialiasing: false
-            }
-
-            // уровень заряда: снизу вверх
-            Rectangle {
-                anchors.left: body.left
-                anchors.right: body.right
-                anchors.bottom: body.bottom
-                anchors.margins: 2
-                height: Math.max(0, (parent.height - 4) * root.batteryLevel/100)
-                radius: 1
-                color: root.fg
-                antialiasing: false
-            }
-
-            // носик сверху по центру
-            Rectangle {
-                width: 3; height: 1
-                anchors.bottom: body.top
-                anchors.horizontalCenter: body.horizontalCenter
-                color: root.fg
-                radius: 1
-            }
-        }
         // время
         Rectangle {
             width: 36

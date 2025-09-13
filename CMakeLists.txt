@@ -26,6 +26,8 @@ qt_add_qml_module(appcalculator
         Theme.qml
         components/CalcButton.qml
         QML_FILES components/StatusBar.qml
+        QML_FILES components/WifiIcon.qml
+        QML_FILES components/BatteryIcon.qml
 )
 
 # Линковка

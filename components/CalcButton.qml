@@ -28,7 +28,7 @@ Control {
         id: label
         anchors.centerIn: root
         font.pixelSize: 24
-        font.bold: true
+        font.weight: Font.Medium
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         color: root.hovered ? Theme.theme_1_6 : Theme.theme_1_1
