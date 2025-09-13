@@ -29,9 +29,9 @@ Item {
 
         // Wifi
         WifiIcon {
-            quality: 2
+            //quality: 2
             anchors.left: content.left
-            anchors.leftMargin: 15
+            anchors.leftMargin: 12
             anchors.top: content.top
             anchors.topMargin: 4
         }
