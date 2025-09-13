@@ -17,7 +17,7 @@ Item {
         height: 14
         color: root.color
         anchors.right: root.right
-        anchors.rightMargin: 3
+        anchors.rightMargin: 4
         anchors.verticalCenter: root.verticalCenter
     }
 
@@ -27,7 +27,7 @@ Item {
         height: 14
         color: root.dimColor
         anchors.right: root.right
-        anchors.rightMargin: 3
+        anchors.rightMargin: 4
         anchors.verticalCenter: root.verticalCenter
     }
 
@@ -39,18 +39,18 @@ Item {
         anchors.bottom: root.bottom
         anchors.bottomMargin: 1
         anchors.right: root.right
-        anchors.rightMargin: 3
+        anchors.rightMargin: 4
     }
 
     // носик сверху по центру
     Rectangle {
-        width: 7; height: 2
+        width: 6; height: 2
         anchors.left: root.left
         anchors.top: root.top
         color: root.bgColor
     }
     Rectangle {
-        width: 6; height: 2
+        width: 7; height: 2
         anchors.right: root.right
         anchors.top: root.top
         color: root.bgColor

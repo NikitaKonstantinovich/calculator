@@ -5,7 +5,7 @@ import App 1.0
 
 Item {
     id: root
-    width: parent ? parent.width : 360
+    width: 360
     height: 24
 
     // Настройка
@@ -19,98 +19,56 @@ Item {
     Rectangle { anchors.fill: parent; color: root.bg }
 
     // Правая группа: иконки + время
-    Row {
-        id: right
-        anchors.right: parent.right
-        anchors.rightMargin: 8
-        anchors.verticalCenter: parent.verticalCenter
-        spacing: 8
+    Item {
+        width: 118
+        height: 24
+        id: content
+        anchors.left: root.left
+        anchors.leftMargin: 242
+        anchors.verticalCenter: root.verticalCenter
 
         // Wifi
-        WifiIcon {}
-
-        // Сотовая связь — треугольник из 4 секций
-        Item {
-            id: cellular
-            width: 16; height: 16
-
-            Item {
-                id: shape
-                width: 14; height: 14
-                anchors.centerIn: parent
-                visible: root.signalBars > 0
-
-                // 0..4, с защитой от мусора
-                property int bars: Math.max(0, Math.min(4, root.signalBars))
-                property color on:  root.fg
-                property color off: Qt.rgba(1,1,1,0.30)
-
-                Canvas {
-                    id: cellCanvas
-                    anchors.fill: parent
-                    antialiasing: false
-
-                    onPaint: {
-                        const ctx = getContext("2d");
-                        const w = Math.floor(width);
-                        const h = Math.floor(height);
-                        ctx.clearRect(0, 0, w, h);
-
-                        const steps = 4;                 // 4 вертикальные секции
-                        for (let i = 0; i < steps; ++i) {
-                            // вертикальные границы текущей секции
-                            const x0 = Math.floor(i     * w / steps);
-                            const x1 = Math.floor((i+1) * w / steps);
-
-                            // высота треугольника на левой/правой границе секции
-                            // гипотенуза идёт от (0,h) до (w,0)
-                            const y0 = Math.floor(h - (x0 * h / w));
-                            const y1 = Math.floor(h - (x1 * h / w));
-
-                            // цвет секции: слева направо заполняем i < bars
-                            ctx.fillStyle = (i < shape.bars) ? shape.on : shape.off;
-
-                            // секция — трапеция (первая слева выродится в треугольник)
-                            ctx.beginPath();
-                            ctx.moveTo(x0, h);     // низ слева
-                            ctx.lineTo(x1, h);     // низ справа
-                            ctx.lineTo(x1, y1);    // верх справа по гипотенузе
-                            ctx.lineTo(x0, y0);    // верх слева по гипотенузе
-                            ctx.closePath();
-                            ctx.fill();
-                        }
-                    }
-
-                    // перерисовка при изменениях и на старте
-                    Connections {
-                        target: shape
-                        function onBarsChanged()  { cellCanvas.requestPaint() }
-                        function onOnChanged()    { cellCanvas.requestPaint() }
-                        function onOffChanged()   { cellCanvas.requestPaint() }
-                        function onWidthChanged() { cellCanvas.requestPaint() }
-                        function onHeightChanged(){ cellCanvas.requestPaint() }
-                    }
-                    Component.onCompleted: requestPaint()
-                }
-            }
+        WifiIcon {
+            quality: 2
+            anchors.left: content.left
+            anchors.leftMargin: 15
+            anchors.top: content.top
+            anchors.topMargin: 4
         }
 
-        BatteryIcon {}
+        // Сотовая связь
+        CellularIcon {
+            signalBars: 2
+            anchors.left: content.left
+            anchors.top: content.top
+            anchors.topMargin: 4
+            anchors.leftMargin: 35
+        }
+
+        // батарея
+        BatteryIcon {
+            batteryLevel: 30
+            anchors.left: content.left
+            anchors.top: content.top
+            anchors.topMargin: 4
+            anchors.leftMargin: 55
+        }
 
         // время
         Rectangle {
+            id: time
             width: 36
             height: 17;
-            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: content.left
+            anchors.top: content.top
             color: root.bg
-            anchors.rightMargin: 8
+            anchors.leftMargin: 74
+            anchors.topMargin: 3
 
             Text {
-                id: time
+                id: timeTxt
                 anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 4
-                anchors.bottomMargin: 1
+                anchors.verticalCenter: time.verticalCenter
                 font.family: "Roboto"
                 font.pixelSize: 14
                 font.weight: Font.Medium
@@ -120,7 +78,7 @@ Item {
             // авто-обновление каждую минуту
             Timer {
                 interval: 60*1000; running: true; repeat: true
-                onTriggered: time.text = Qt.formatTime(new Date(), "hh:mm")
+                onTriggered: timeTxt.text = Qt.formatTime(new Date(), "hh:mm")
             }
         }
     }

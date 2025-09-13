@@ -4,6 +4,7 @@ import QtQuick.Controls
 import App 1.0
 
 ApplicationWindow {
+    id: mainWindow
     visible: true
     width: 360; height: 640
     color: Theme.theme_1_4_50
@@ -12,11 +13,12 @@ ApplicationWindow {
     Component.onCompleted: console.log("Theme check:", Theme.theme_1_3)
 
     StatusBar {
-
+        anchors.top: mainWindow.top
+        anchors.left: mainWindow.left
     }
 
-    CalcButton {
-        z: 1
-        text: "1"
-    }
+    // CalcButton {
+    //     z: 1
+    //     text: "1"
+    // }
 }
