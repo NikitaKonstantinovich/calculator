@@ -4,7 +4,7 @@ import App 1.0
 Item {
     id: root
     anchors.top: parent.top
-    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.left: parent.left
     anchors.topMargin: 24
     width: 360
     height: 156

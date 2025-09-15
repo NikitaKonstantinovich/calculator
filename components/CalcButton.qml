@@ -11,6 +11,11 @@ Control {
     signal pressed()
     signal longPressed()
 
+    property color bgN: Theme.theme_1_4
+    property color bgA: Theme.theme_1_3
+    property color tN: Theme.theme_1_1
+    property color tA: Theme.theme_1_6
+
     implicitWidth: 60
     implicitHeight: 60
     enabled: !disabled
@@ -18,9 +23,15 @@ Control {
 
     background: Rectangle {
         id: circle
+        Rectangle {
+            z: -1
+            anchors.fill: parent
+            radius: width/2
+            color: Theme.theme_1_6
+        }
         anchors.fill: parent
         radius: width/2
-        color: root.hovered ? Theme.theme_1_3 : Theme.theme_1_4
+        color: root.hovered ? root.bgA : root.bgN
         Behavior on color { ColorAnimation { duration: 120 } }
     }
 
@@ -31,7 +42,7 @@ Control {
         font.weight: Font.Medium
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        color: root.hovered ? Theme.theme_1_6 : Theme.theme_1_1
+        color: root.hovered ? root.tA : root.tN
     }
 
     // Лонг-тап: таймер 4 сек

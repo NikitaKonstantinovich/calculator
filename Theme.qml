@@ -13,5 +13,6 @@ QtObject {
     readonly property color theme_1_add_2: "#F7E425"
     readonly property color theme_1_3_30: Qt.rgba(theme_1_3.r, theme_1_3.g, theme_1_3.b, 0.3)
     readonly property color theme_1_1_30: Qt.rgba(theme_1_1.r, theme_1_1.g, theme_1_1.b, 0.3)
-    readonly property color theme_1_4_50: Qt.rgba(theme_1_5.r, theme_1_5.g, theme_1_5.b, 0.5)
+    readonly property color theme_1_4_50: Qt.rgba(theme_1_4.r, theme_1_4.g, theme_1_4.b, 0.5)
+    readonly property color theme_1_5_50: Qt.rgba(theme_1_5.r, theme_1_5.g, theme_1_5.b, 0.5)
 }

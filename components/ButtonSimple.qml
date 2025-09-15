@@ -19,7 +19,7 @@ Item {
         id: grid
         anchors.fill: parent
         columns: 3
-        spacing: 12
+        spacing: 24
 
         Repeater {
             model: root.keys

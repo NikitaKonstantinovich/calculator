@@ -35,6 +35,14 @@ qt_add_qml_module(appcalculator
         QML_FILES components/TextCalculationLine.qml
         QML_FILES components/ButtonAction.qml
         QML_FILES components/ButtonSimple.qml
+        QML_FILES components/icons/PlusIcon.qml
+        QML_FILES components/icons/MinusIcon.qml
+        QML_FILES components/icons/MultiplyIcon.qml
+        QML_FILES components/icons/DivideIcon.qml
+        QML_FILES components/icons/PercentIcon.qml
+        QML_FILES components/icons/PlusMinusIcon.qml
+        QML_FILES components/icons/BracketsIcon.qml
+        QML_FILES components/icons/EqualsIcon.qml
 )
 
 # Линковка

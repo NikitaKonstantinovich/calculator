@@ -27,6 +27,21 @@ ApplicationWindow {
         anchors.topMargin:  288
     }
 
+    CalcButton {
+        text: "C"
+        tN: Theme.theme_1_6
+        tA: Theme.theme_1_6
+        bgN: Theme.theme_1_5_50
+        bgA: Theme.theme_1_5
+
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.leftMargin: 24
+        anchors.topMargin:  540
+    }
+
+    PlusIcon {}
+
 
 
 }
