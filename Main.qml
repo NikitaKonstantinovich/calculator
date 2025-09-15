@@ -10,15 +10,20 @@ ApplicationWindow {
     color: Theme.theme_1_1
 
     StatusBar {
-        anchors.top: mainWindow.top
-        anchors.left: mainWindow.left
+        anchors.top: parent.top
+        anchors.left: parent.left
     }
 
     BackCalculation {
         botRadius: 26
     }
 
-    ButtonAction {}
+    ButtonAction {
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.leftMargin: 24
+        anchors.topMargin:  204
+    }
 
     ButtonSimple {
         anchors.left: parent.left
@@ -39,9 +44,5 @@ ApplicationWindow {
         anchors.leftMargin: 24
         anchors.topMargin:  540
     }
-
-    PlusIcon {}
-
-
 
 }

@@ -1,11 +1,14 @@
-//components/CalcButton.qml
+// components/CalcButton.qml
 import QtQuick
 import QtQuick.Controls
 import App 1.0
 
 Control {
     id: root
+
+    // либо задаём текст, либо передаём компонент иконки в content
     property alias text: label.text
+    property Component content: null
 
     property bool disabled: false
     signal pressed()
@@ -22,38 +25,52 @@ Control {
     hoverEnabled: true
 
     background: Rectangle {
-        id: circle
+        anchors.fill: parent
+        radius: width / 2
+        color: root.hovered ? root.bgA : root.bgN
+        Behavior on color { ColorAnimation { duration: 120 } }
+
         Rectangle {
             z: -1
             anchors.fill: parent
-            radius: width/2
+            radius: width / 2
             color: Theme.theme_1_6
         }
+    }
+
+    // единый контейнер: показываем либо иконку (Loader), либо текст (Text)
+    contentItem: Item {
         anchors.fill: parent
-        radius: width/2
-        color: root.hovered ? root.bgA : root.bgN
-        Behavior on color { ColorAnimation { duration: 120 } }
+
+        Loader {
+            id: iconLoader
+            anchors.centerIn: parent
+            sourceComponent: root.content
+            visible: sourceComponent !== null
+        }
+
+        Text {
+            id: label
+            anchors.centerIn: parent
+            visible: iconLoader.sourceComponent === null
+            font.pixelSize: 24
+            font.weight: Font.Medium
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            color: root.hovered ? root.tA : root.tN
+        }
     }
 
-    contentItem: Text {
-        id: label
-        anchors.centerIn: root
-        font.pixelSize: 24
-        font.weight: Font.Medium
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        color: root.hovered ? root.tA : root.tN
-    }
-
-    // Лонг-тап: таймер 4 сек
+    // лонг-тап: 4 сек
     Timer { id: hold; interval: 4000; repeat: false; onTriggered: root.longPressed() }
+
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
         acceptedButtons: Qt.LeftButton
         cursorShape: Qt.PointingHandCursor
 
-        onPressed:  if (root.enabled) hold.start()
+        onPressed: if (root.enabled) hold.start()
         onReleased: {
             if (root.enabled) {
                 hold.stop()
@@ -64,5 +81,4 @@ Control {
         }
         onCanceled: hold.stop()
     }
-
 }
