@@ -29,7 +29,7 @@ Item {
 
         // Wifi
         WifiIcon {
-            //quality: 2
+            quality: 2
             anchors.left: content.left
             anchors.leftMargin: 12
             anchors.top: content.top
@@ -71,7 +71,7 @@ Item {
                 anchors.verticalCenter: time.verticalCenter
                 font.family: "Roboto"
                 font.pixelSize: 14
-                font.weight: Font.Medium
+                font.weight: 500
                 color: Theme.theme_1_6
                 text: Qt.formatTime(new Date(), "hh:mm")
             }

@@ -30,6 +30,11 @@ qt_add_qml_module(appcalculator
         QML_FILES components/BatteryIcon.qml
         QML_FILES components/CellularIcon.qml
         QML_FILES components/CircularSector.qml
+        QML_FILES components/BackCalculation.qml
+        QML_FILES components/TextResult.qml
+        QML_FILES components/TextCalculationLine.qml
+        QML_FILES components/ButtonAction.qml
+        QML_FILES components/ButtonSimple.qml
 )
 
 # Линковка

@@ -7,18 +7,26 @@ ApplicationWindow {
     id: mainWindow
     visible: true
     width: 360; height: 640
-    color: Theme.theme_1_4_50
-
-    // не 'undefined'
-    Component.onCompleted: console.log("Theme check:", Theme.theme_1_3)
+    color: Theme.theme_1_1
 
     StatusBar {
         anchors.top: mainWindow.top
         anchors.left: mainWindow.left
     }
 
-    // CalcButton {
-    //     z: 1
-    //     text: "1"
-    // }
+    BackCalculation {
+        botRadius: 26
+    }
+
+    ButtonAction {}
+
+    ButtonSimple {
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.leftMargin: 24
+        anchors.topMargin:  288
+    }
+
+
+
 }
