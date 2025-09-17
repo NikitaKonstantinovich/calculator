@@ -168,17 +168,45 @@ void CalculatorModel::flushEntryToExpr() {
 }
 
 void CalculatorModel::pressOp(const QString& op) {
+    // Приводим оператор к ASCII-форме
+    const QString realOp =
+        (op == "×" ? "*" :
+             (op == "÷" ? "/" :
+                  (op == "−" ? "-" : op)));
+
+    // ---- Случай: только что было "=" ----
+    // Начинаем НОВОЕ выражение с полученного результата и выбранного оператора.
+    if (m_lastWasEquals) {
+        m_expr.clear();
+        m_parenOpen = false;
+
+        // текущий результат (в display/m_cur) переносим как число
+        QString num = normalizeNumber(m_cur);
+        if (num.isEmpty()) num = "0";
+
+        m_expr = num;
+        if (realOp == "*" || realOp == "/")
+            m_expr += realOp;
+        else
+            m_expr = normalizeSigns(m_expr, realOp); // для +/-
+
+        m_cur.clear();              // готовим ввод следующего числа
+        m_lastWasEquals = false;
+        updateDisplay();            // уведомим UI (expression меняется тем же сигналом)
+        return;
+    }
+
+    // ---- Обычный сценарий ввода ----
+    // Если перед оператором стоит ')', НЕ сбрасываем "0" между ) и оператором.
     if (!( !m_expr.isEmpty() && m_expr.back() == ')' )) {
         if (m_cur.isEmpty()) m_cur = "0";
         flushEntryToExpr();
     }
 
-    // Нормализуем оператор и добавляем
-    if (op == "×" || op == "*" || op == "÷" || op == "/") {
-        const QString realOp = (op == "×" ? "×" : (op == "÷" ? "÷" : op));
+    if (realOp == "*" || realOp == "/") {
         m_expr += realOp;
     } else {
-        m_expr = normalizeSigns(m_expr, op); // ++,+-,-+,-- сворачиваем
+        m_expr = normalizeSigns(m_expr, realOp); // ++,+-,-+,-- сворачиваем
     }
 
     m_lastWasEquals = false;
