@@ -6,6 +6,8 @@ Item {
     width: 280
     height: 30
 
+    property var model
+
     Text {
         id: calcLine
         anchors.verticalCenter: root.verticalCenter
@@ -15,7 +17,7 @@ Item {
         font.weight: 600
         font.letterSpacing: 0.5
         color: Theme.theme_1_6
-        text: "368"
+        text: model ? model.expression : ""
+        elide: Text.ElideLeft
     }
-
 }

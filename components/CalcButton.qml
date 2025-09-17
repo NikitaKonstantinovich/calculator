@@ -6,13 +6,15 @@ import App 1.0
 Control {
     id: root
 
+    signal pressed(string key)
+
     // либо задаём текст, либо передаём компонент иконки в content
     property alias text: label.text
     property Component content: null
 
     property bool disabled: false
-    signal pressed()
     signal longPressed()
+    signal longPressed2s()
 
     property color bgN: Theme.theme_1_4
     property color bgA: Theme.theme_1_3
@@ -64,21 +66,32 @@ Control {
     // лонг-тап: 4 сек
     Timer { id: hold; interval: 4000; repeat: false; onTriggered: root.longPressed() }
 
+    // лонг-тап: 2 сек
+    Timer { id: hold2; interval: 2000; repeat: false; onTriggered: root.longPressed2s() }
+
+    property bool longFired: false
+
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
         acceptedButtons: Qt.LeftButton
         cursorShape: Qt.PointingHandCursor
 
-        onPressed: if (root.enabled) hold.start()
+        onPressed: if (root.enabled) {
+                       longFired = false
+                       hold.start()
+                       hold2.start()
+                   }
         onReleased: {
-            if (root.enabled) {
-                hold.stop()
-                root.pressed()
-            } else {
-                hold.stop()
-            }
+            hold.stop()
+            hold2.stop()
+            if (!root.enabled) return
+            if (!longFired) root.pressed(root.text)
         }
-        onCanceled: hold.stop()
+        onCanceled: {
+            longFired = false
+            hold.stop()
+            hold2.stop()
+        }
     }
 }

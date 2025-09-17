@@ -1,3 +1,4 @@
+//components/TextResult.qml
 import QtQuick
 import App 1.0
 
@@ -5,6 +6,8 @@ Item {
     id: root
     width: 281
     height: 60
+
+    property var model
 
     Text {
         id: result
@@ -15,7 +18,6 @@ Item {
         font.weight: 600
         font.letterSpacing: 0.5
         color: Theme.theme_1_6
-        text: "0"
+        text:  model ? model.display : "0"
     }
-
 }

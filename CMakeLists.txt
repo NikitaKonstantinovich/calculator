@@ -25,24 +25,27 @@ qt_add_qml_module(appcalculator
         Main.qml
         Theme.qml
         components/CalcButton.qml
-        QML_FILES components/StatusBar.qml
-        QML_FILES components/WifiIcon.qml
-        QML_FILES components/BatteryIcon.qml
-        QML_FILES components/CellularIcon.qml
-        QML_FILES components/CircularSector.qml
-        QML_FILES components/BackCalculation.qml
-        QML_FILES components/TextResult.qml
-        QML_FILES components/TextCalculationLine.qml
-        QML_FILES components/ButtonAction.qml
-        QML_FILES components/ButtonSimple.qml
-        QML_FILES components/icons/PlusIcon.qml
-        QML_FILES components/icons/MinusIcon.qml
-        QML_FILES components/icons/MultiplyIcon.qml
-        QML_FILES components/icons/DivideIcon.qml
-        QML_FILES components/icons/PercentIcon.qml
-        QML_FILES components/icons/PlusMinusIcon.qml
-        QML_FILES components/icons/BracketsIcon.qml
-        QML_FILES components/icons/EqualsIcon.qml
+        components/StatusBar.qml
+        components/WifiIcon.qml
+        components/BatteryIcon.qml
+        components/CellularIcon.qml
+        components/CircularSector.qml
+        components/BackCalculation.qml
+        components/TextResult.qml
+        components/TextCalculationLine.qml
+        components/ButtonAction.qml
+        components/ButtonSimple.qml
+        components/icons/PlusIcon.qml
+        components/icons/MinusIcon.qml
+        components/icons/MultiplyIcon.qml
+        components/icons/DivideIcon.qml
+        components/icons/PercentIcon.qml
+        components/icons/PlusMinusIcon.qml
+        components/icons/BracketsIcon.qml
+        components/icons/EqualsIcon.qml
+    SOURCES
+        src/CalculatorModel.h
+        src/CalculatorModel.cpp
 )
 
 # Линковка

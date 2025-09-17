@@ -1,3 +1,4 @@
+//components/ButtonSimple.qml
 import QtQuick
 import QtQml
 import QtQml.Models
@@ -7,6 +8,8 @@ Item {
     id: root
     width: 228
     height: 312
+
+    signal keyPressed(string key)
 
     readonly property var keys: [
         "7","8","9",
@@ -36,7 +39,7 @@ Item {
                     delegate: CalcButton {
                         width: 60; height: 60
                         text: modelData
-                        onPressed: root.pressed(text)
+                        onPressed: root.keyPressed(text)
                     }
                 }
             }

@@ -1,3 +1,4 @@
+//components/ButtonAction.qml
 import QtQuick
 import App 1.0
 
@@ -30,7 +31,7 @@ Item {
             delegate: CalcButton {
                 width: 60; height: 60
                 content: root.ops[index].comp
-                onPressed: root.opPressed(root.ops[index].op)
+                onPressed: root.pressed(root.ops[index].op)
                 bgN: Theme.theme_1_2
                 bgA: Theme.theme_1_add_2
                 tN: Theme.theme_1_6
@@ -51,7 +52,7 @@ Item {
             delegate: CalcButton {
                 width: 60; height: 60
                 content: root.ops[index + 4].comp
-                onPressed: root.opPressed(root.ops[index + 4].op)
+                onPressed: root.pressed(root.ops[index + 4].op)
                 bgN: Theme.theme_1_2
                 bgA: Theme.theme_1_add_2
                 tN: Theme.theme_1_6
@@ -59,7 +60,4 @@ Item {
             }
         }
     }
-
-
-
 }

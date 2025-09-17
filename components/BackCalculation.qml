@@ -1,3 +1,4 @@
+// components/BackCalculation.qml
 import QtQuick
 import App 1.0
 
@@ -9,6 +10,8 @@ Item {
     width: 360
     height: 156
     property int botRadius: 16
+
+    property var model
 
     Rectangle {
         anchors.fill: parent
@@ -25,6 +28,7 @@ Item {
         anchors.left: root.left
         anchors.topMargin: 44
         anchors.leftMargin: 39
+        model: root.model
     }
 
     TextResult {
@@ -32,6 +36,6 @@ Item {
         anchors.left: root.left
         anchors.topMargin: 82
         anchors.leftMargin: 39
-
+        model: root.model
     }
 }
