@@ -11,7 +11,22 @@ ApplicationWindow {
 
     CalculatorModel { id: calc }
 
-    property bool showSecret: true
+    property bool showSecret: false
+    property bool secretArmed: false
+    property string secretBuffer: ""
+
+    function resetSecret() {
+        secretArmed = false
+        secretBuffer = ""
+        secretTimer.stop()
+    }
+
+    Timer {
+        id: secretTimer
+        interval: 5000    // 5 секунд на ввод "123"
+        repeat: false
+        onTriggered: resetSecret()
+    }
 
     SecretMenu {
         id: secret
@@ -53,6 +68,13 @@ ApplicationWindow {
                 calc.equals();        break;
             }
         }
+
+        onEqualsLongPress: {
+            secretArmed = true
+            secretBuffer = ""
+            secretTimer.start()
+            console.log("Secret armed: waiting for 123 within 5s")
+        }
     }
 
     ButtonSimple {
@@ -63,6 +85,22 @@ ApplicationWindow {
         anchors.topMargin:  288
 
         onKeyPressed: (k) => {
+            if (mainWindow.secretArmed) {
+                if (k < "0" || k > "9") return   // игнор не-цифр
+                secretBuffer += k
+
+                const target = "123"
+                if (target.indexOf(secretBuffer) !== 0) {
+                resetSecret()
+                return
+            }
+            if (secretBuffer === target) {
+                resetSecret()
+                showSecret = true
+            }
+            return
+         }
+
             if (k >= "0" && k <= "9")       calc.inputDigit(Number(k))
             else if (k === ".")             calc.inputDot()
             else console.warn("Unknown key:", k)

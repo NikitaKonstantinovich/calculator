@@ -9,6 +9,8 @@ Item {
 
     signal pressed(string op)
 
+    signal equalsLongPress()
+
     readonly property var ops: [
         { comp: Qt.createComponent("icons/BracketsIcon.qml"), op: "()"  },
         { comp: Qt.createComponent("icons/PlusMinusIcon.qml"), op: "neg" },
@@ -53,6 +55,10 @@ Item {
                 width: 60; height: 60
                 content: root.ops[index + 4].comp
                 onPressed: root.pressed(root.ops[index + 4].op)
+                onLongPressed4s: {
+                    if (root.ops[index + 4].op === "=")
+                        root.equalsLongPress()
+                }
                 bgN: Theme.theme_1_2
                 bgA: Theme.theme_1_add_2
                 tN: Theme.theme_1_6

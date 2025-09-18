@@ -13,7 +13,7 @@ Control {
     property Component content: null
 
     property bool disabled: false
-    signal longPressed()
+    signal longPressed4s()
     signal longPressed2s()
 
     property color bgN: Theme.theme_1_4
@@ -64,7 +64,7 @@ Control {
     }
 
     // лонг-тап: 4 сек
-    Timer { id: hold; interval: 4000; repeat: false; onTriggered: root.longPressed() }
+    Timer { id: hold4; interval: 4000; repeat: false; onTriggered: root.longPressed4s() }
 
     // лонг-тап: 2 сек
     Timer { id: hold2; interval: 2000; repeat: false; onTriggered: root.longPressed2s() }
@@ -79,18 +79,18 @@ Control {
 
         onPressed: if (root.enabled) {
                        longFired = false
-                       hold.start()
+                       hold4.start()
                        hold2.start()
                    }
         onReleased: {
-            hold.stop()
+            hold4.stop()
             hold2.stop()
             if (!root.enabled) return
             if (!longFired) root.pressed(root.text)
         }
         onCanceled: {
             longFired = false
-            hold.stop()
+            hold4.stop()
             hold2.stop()
         }
     }
