@@ -1,45 +1,68 @@
 import QtQuick
 import QtQuick.Shapes
+import App 1.0
 
 Item {
+    id:root
     width: 30; height: 30
     property color ink: Theme.theme_1_6
     property real  stroke: 2
 
-    Shape {
-        anchors.fill: parent; antialiasing: true
+    Item {
+        id: icon
+        height: 18
+        width: 19
+        anchors.left: root.left
+        anchors.top: root.top
+        anchors.leftMargin: 5.5
+        anchors.topMargin: 6
 
-        // черта
-        ShapePath {
-            strokeColor: ink; strokeWidth: stroke
-            fillColor: "transparent"; capStyle: ShapePath.RoundCap
-            startX: width*0.2; startY: height*0.5
-            PathLine { x: width*0.8; y: height*0.5 }
-        }
-        // верхняя точка (малый круг)
-        ShapePath {
-            strokeColor: "transparent"; fillColor: ink
-            startX: width*0.5 + 3; startY: height*0.22
-            PathArc {
-                x: width*0.5 - 3; y: height*0.22
-                radiusX: 3; radiusY: 3; useLargeArc: true
+        Shape {
+            anchors.fill: parent; antialiasing: true
+
+            // полоса
+            ShapePath {
+                strokeColor: root.ink; strokeWidth: root.stroke
+                fillColor: root.ink; capStyle: ShapePath.RoundCap
+                startX: 0; startY: 9
+                PathLine { x: 19; y: 9 }
             }
-            PathArc {
-                x: width*0.5 + 3; y: height*0.22
-                radiusX: 3; radiusY: 3; useLargeArc: true
+
+            // верхний эллипс
+            ShapePath {
+                strokeColor: root.ink; fillColor: root.ink
+                strokeWidth: root.stroke
+                startX: 9.5; startY: 0
+                        PathArc {
+                            x: 9.5; y: 3
+                            radiusX: 1
+                            radiusY: 1
+                            useLargeArc: true
+                        }
+                        PathArc {
+                            x: 9.5; y: 0
+                            radiusX: 1
+                            radiusY: 1
+                            useLargeArc: true
+                        }
             }
-        }
-        // нижняя точка
-        ShapePath {
-            strokeColor: "transparent"; fillColor: ink
-            startX: width*0.5 + 3; startY: height*0.78
-            PathArc {
-                x: width*0.5 - 3; y: height*0.78
-                radiusX: 3; radiusY: 3; useLargeArc: true
-            }
-            PathArc {
-                x: width*0.5 + 3; y: height*0.78
-                radiusX: 3; radiusY: 3; useLargeArc: true
+            // нижний эллипс
+            ShapePath {
+                strokeColor: root.ink; fillColor: root.ink
+                strokeWidth: root.stroke
+                startX: 9.5; startY: 15
+                        PathArc {
+                            x: 9.5; y: 18
+                            radiusX: 1
+                            radiusY: 1
+                            useLargeArc: true
+                        }
+                        PathArc {
+                            x: 9.5; y: 15
+                            radiusX: 1
+                            radiusY: 1
+                            useLargeArc: true
+                        }
             }
         }
     }
