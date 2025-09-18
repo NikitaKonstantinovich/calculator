@@ -46,6 +46,8 @@ qt_add_qml_module(appcalculator
     SOURCES
         src/CalculatorModel.h
         src/CalculatorModel.cpp
+        QML_FILES components/BackButton.qml
+        QML_FILES SecretMenu.qml
 )
 
 # Линковка

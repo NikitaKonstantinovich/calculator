@@ -11,6 +11,17 @@ ApplicationWindow {
 
     CalculatorModel { id: calc }
 
+    property bool showSecret: true
+
+    SecretMenu {
+        id: secret
+        z: 1
+        anchors.top: parent.top
+        anchors.left: parent.left
+        visible: showSecret
+        onBack: showSecret = false
+    }
+
     StatusBar {
         anchors.top: parent.top
         anchors.left: parent.left
