@@ -48,15 +48,13 @@ Control {
             id: iconLoader
             anchors.centerIn: parent
             sourceComponent: root.content
-            visible: sourceComponent !== null
         }
 
-        Text {
+        StyledText {
             id: label
             anchors.centerIn: parent
-            visible: iconLoader.sourceComponent === null
             font.pixelSize: 24
-            font.weight: Font.Medium
+            style: TextStyles.button
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             color: root.hovered ? root.tA : root.tN

@@ -12,7 +12,11 @@ qt_add_executable(appcalculator
     main.cpp
 )
 
-set_source_files_properties(Theme.qml PROPERTIES
+set_source_files_properties(Theme.qml    PROPERTIES
+    QT_QML_SINGLETON_TYPE TRUE
+)
+
+set_source_files_properties(TextStyles.qml    PROPERTIES
     QT_QML_SINGLETON_TYPE TRUE
 )
 
@@ -43,11 +47,15 @@ qt_add_qml_module(appcalculator
         components/icons/PlusMinusIcon.qml
         components/icons/BracketsIcon.qml
         components/icons/EqualsIcon.qml
+        components/BackButton.qml
+        SecretMenu.qml
+        TextStyles.qml
+        components/StyledText.qml
     SOURCES
         src/CalculatorModel.h
         src/CalculatorModel.cpp
-        QML_FILES components/BackButton.qml
-        QML_FILES SecretMenu.qml
+    RESOURCES
+        components/fonts/OpenSans-Var.ttf
 )
 
 # Линковка

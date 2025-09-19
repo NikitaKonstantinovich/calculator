@@ -8,14 +8,12 @@ Item {
 
     property var model
 
-    Text {
+    StyledText {
         id: calcLine
         anchors.verticalCenter: root.verticalCenter
         anchors.right: root.right
         anchors.rightMargin: 2
-        font.pixelSize: 20
-        font.weight: 600
-        font.letterSpacing: 0.5
+        style: TextStyles.body_2
         color: Theme.theme_1_6
         text: model ? model.expression : ""
         elide: Text.ElideLeft

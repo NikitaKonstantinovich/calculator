@@ -12,7 +12,7 @@ Item {
 
     property var model
 
-    Text {
+    StyledText {
         id: result
         anchors.fill: parent
         anchors.right: root.right
@@ -23,9 +23,8 @@ Item {
         color: Theme.theme_1_6
         text:  model ? model.display : "0"
 
-        font.pixelSize: root.maxPx
-        minimumPixelSize: root.minPx
-        fontSizeMode: Text.Fit
+        style: TextStyles.body_1
+        fit: true
 
         wrapMode: Text.NoWrap
         elide: Text.ElideNone

@@ -23,14 +23,15 @@ Control {
         border.width: 1
     }
 
-    contentItem: Text {
+    contentItem: StyledText {
         anchors.centerIn: parent
         text: "Back"
-        font.pixelSize: 24
-        font.bold: true
+        style: TextStyles.button
         color: Theme.theme_1_6
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        fit: false
+        font.pixelSize: 24
     }
 
     MouseArea {

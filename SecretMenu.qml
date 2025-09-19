@@ -5,10 +5,10 @@ import App 1.0
 
 Item {
     id: secretMenu
-    anchors.leftMargin: 30
+    anchors.leftMargin: 5
     anchors.topMargin: 70
 
-    width: 300
+    width: 350
     height: 500
 
     signal back()
@@ -28,14 +28,12 @@ Item {
         onClicked: secretMenu.back()
     }
 
-    // заголовок
-    Text {
+    StyledText {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 60
         text: "Secret menu"
         color: Theme.theme_1_6
-        font.pixelSize: 28
-        font.bold: true
+        style: TextStyles.body_1
     }
 }

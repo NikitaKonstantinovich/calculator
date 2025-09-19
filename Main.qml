@@ -122,5 +122,4 @@ ApplicationWindow {
         onPressed: calc.clearEntry()
         onLongPressed2s: calc.clearAll()
     }
-
 }
